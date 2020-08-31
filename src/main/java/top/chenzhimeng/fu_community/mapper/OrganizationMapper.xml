@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.chenzhimeng.fu_community.mapper.OrganizationMapper">
+  <resultMap id="BaseResultMap" type="top.chenzhimeng.fu_community.model.Organization">
+    <id column="organization_id" jdbcType="INTEGER" property="organizationId" />
+    <result column="organization_name" jdbcType="VARCHAR" property="organizationName" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="slogan" jdbcType="VARCHAR" property="slogan" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="founder_id" jdbcType="INTEGER" property="founderId" />
+    <result column="contact" jdbcType="VARCHAR" property="contact" />
+    <result column="auditor_id" jdbcType="INTEGER" property="auditorId" />
+    <result column="has_check" jdbcType="BIT" property="hasCheck" />
+    <result column="audit_time" jdbcType="TIMESTAMP" property="auditTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    organization_id, organization_name, logo, slogan, intro, founder_id, contact, auditor_id, 
+    has_check, audit_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_organization
+    where organization_id = #{organizationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_organization
+    where organization_id = #{organizationId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="top.chenzhimeng.fu_community.model.Organization">
+    insert into t_organization (organization_id, organization_name, 
+      logo, slogan, intro, 
+      founder_id, contact, auditor_id, 
+      has_check, audit_time)
+    values (#{organizationId,jdbcType=INTEGER}, #{organizationName,jdbcType=VARCHAR}, 
+      #{logo,jdbcType=VARCHAR}, #{slogan,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, 
+      #{founderId,jdbcType=INTEGER}, #{contact,jdbcType=VARCHAR}, #{auditorId,jdbcType=INTEGER}, 
+      #{hasCheck,jdbcType=BIT}, #{auditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="top.chenzhimeng.fu_community.model.Organization">
+    insert into t_organization
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="organizationId != null">
+        organization_id,
+      </if>
+      <if test="organizationName != null">
+        organization_name,
+      </if>
+      <if test="logo != null">
+        logo,
+      </if>
+      <if test="slogan != null">
+        slogan,
+      </if>
+      <if test="intro != null">
+        intro,
+      </if>
+      <if test="founderId != null">
+        founder_id,
+      </if>
+      <if test="contact != null">
+        contact,
+      </if>
+      <if test="auditorId != null">
+        auditor_id,
+      </if>
+      <if test="hasCheck != null">
+        has_check,
+      </if>
+      <if test="auditTime != null">
+        audit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="organizationId != null">
+        #{organizationId,jdbcType=INTEGER},
+      </if>
+      <if test="organizationName != null">
+        #{organizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="slogan != null">
+        #{slogan,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="founderId != null">
+        #{founderId,jdbcType=INTEGER},
+      </if>
+      <if test="contact != null">
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorId != null">
+        #{auditorId,jdbcType=INTEGER},
+      </if>
+      <if test="hasCheck != null">
+        #{hasCheck,jdbcType=BIT},
+      </if>
+      <if test="auditTime != null">
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="top.chenzhimeng.fu_community.model.Organization">
+    update t_organization
+    <set>
+      <if test="organizationName != null">
+        organization_name = #{organizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="slogan != null">
+        slogan = #{slogan,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="founderId != null">
+        founder_id = #{founderId,jdbcType=INTEGER},
+      </if>
+      <if test="contact != null">
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorId != null">
+        auditor_id = #{auditorId,jdbcType=INTEGER},
+      </if>
+      <if test="hasCheck != null">
+        has_check = #{hasCheck,jdbcType=BIT},
+      </if>
+      <if test="auditTime != null">
+        audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where organization_id = #{organizationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.chenzhimeng.fu_community.model.Organization">
+    update t_organization
+    set organization_name = #{organizationName,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      slogan = #{slogan,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      founder_id = #{founderId,jdbcType=INTEGER},
+      contact = #{contact,jdbcType=VARCHAR},
+      auditor_id = #{auditorId,jdbcType=INTEGER},
+      has_check = #{hasCheck,jdbcType=BIT},
+      audit_time = #{auditTime,jdbcType=TIMESTAMP}
+    where organization_id = #{organizationId,jdbcType=INTEGER}
+  </update>
+</mapper>

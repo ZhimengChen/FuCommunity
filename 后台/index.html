@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>管理员首页</title>
+		<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+		<script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+		
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/ajax_conf.js"></script>
+		<script src="js/index.js"></script>
+	</head>
+	<body class="container-fluid">
+		<div class="row px-4 py-3 border">
+			<svg t="1597109906529" class="icon mr-3" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4238" width="40" height="40"><path d="M643.4 254.6C573 254.6 516 311.6 516 382s57 127.3 127.3 127.3 127.3-57 127.3-127.3-56.9-127.4-127.2-127.4z m0 209.9c-45.6 0-82.6-37-82.6-82.6s37-82.6 82.6-82.6 82.6 37 82.6 82.6-37 82.6-82.6 82.6zM444.1 266.5H295.7c-24.7 0-44.9 20.2-44.9 44.9v148.2c0 24.7 20.2 44.9 44.9 44.9h148.4c24.7 0 44.9-20.2 44.9-44.9V311.4c0-24.7-20.2-44.9-44.9-44.9z m1.3 187.3c0 4-3.2 7.2-7.2 7.2H301.7c-4 0-7.2-3.2-7.2-7.2V317.3c0-4 3.2-7.2 7.2-7.2h136.5c4 0 7.2 3.2 7.2 7.2v136.5zM444.1 530.7H295.7c-24.7 0-44.9 20.2-44.9 44.9v148.2c0 24.7 20.2 44.9 44.9 44.9h148.4c24.7 0 44.9-20.2 44.9-44.9V575.6c0-24.7-20.2-44.9-44.9-44.9z m1.3 187.3c0 4-3.2 7.2-7.2 7.2H301.7c-4 0-7.2-3.2-7.2-7.2V581.5c0-4 3.2-7.2 7.2-7.2h136.5c4 0 7.2 3.2 7.2 7.2V718zM717.5 525.5H569.2c-24.7 0-44.9 20.2-44.9 44.9v148.2c0 24.7 20.2 44.9 44.9 44.9h148.4c24.7 0 44.9-20.2 44.9-44.9V570.4c0-24.7-20.2-44.9-45-44.9z m1.3 187.2c0 4-3.2 7.2-7.2 7.2H575.1c-4 0-7.2-3.2-7.2-7.2V576.2c0-4 3.2-7.2 7.2-7.2h136.5c4 0 7.2 3.2 7.2 7.2v136.5z" fill="" p-id="4239"></path></svg>
+			<span class="font-weight-bold pt-2">功能导航</span>
+			<svg t="1598437521912" id="refresh" class="icon offset-10 mr-3" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2147" width="24"><path d="M818.766408 728.434721c-10.839802-8.671842-26.738179-7.226535-35.410021 3.613268-67.206775 82.382498-166.210303 130.077629-273.163021 130.077629-193.671136 0-351.209598-157.538462-351.209597-351.209598S316.52223 158.983769 510.193366 158.983769c78.046577 0 151.03458 24.570219 211.737474 70.820042h-23.124912c-13.730416 0-25.292872 11.562456-25.292872 25.292872s11.562456 25.292872 25.292872 25.292872h87.441073c13.730416 0 25.292872-11.562456 25.292872-25.292872V171.991531c0-13.730416-11.562456-25.292872-25.292872-25.292872s-25.292872 11.562456-25.292873 25.292872v24.570219C690.134086 139.472124 603.415667 108.398024 510.193366 108.398024 289.061397 108.398024 108.398024 289.061397 108.398024 510.91602s180.663373 401.795342 401.795342 401.795342c121.405787 0 235.585039-54.199012 312.186309-148.86662 9.394495-10.839802 7.226535-26.738179-3.613267-35.410021z" fill="" p-id="2148"></path><path d="M890.309104 490.681722m-25.292873 0a25.292872 25.292872 0 1 0 50.585745 0 25.292872 25.292872 0 1 0-50.585745 0Z" fill="" p-id="2149"></path><path d="M884.527876 578.845448m-25.292872 0a25.292872 25.292872 0 1 0 50.585744 0 25.292872 25.292872 0 1 0-50.585744 0Z" fill="" p-id="2150"></path><path d="M856.34439 663.395907m-25.292873 0a25.292872 25.292872 0 1 0 50.585745 0 25.292872 25.292872 0 1 0-50.585745 0Z" fill="" p-id="2151"></path></svg>
+			<svg t="1597110676921" class="icon mr-3" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7203" width="24"><path d="M780.357 574.138c-41.036-41.036-89.712-71.588-142.787-90.229 57.347-40.26 95.020-106.929 95.020-182.271 0-122.722-99.809-222.661-222.661-222.661-122.722 0-222.661 99.809-222.661 222.661 0 75.343 37.541 142.011 95.020 182.271-53.076 18.771-101.75 49.322-142.787 90.229-72.236 72.236-111.978 168.29-111.978 270.429 0 23.69 0 41.943 0.13 61.749 0.13 17.088 13.981 30.94 31.069 30.94h0.13c17.218-0.13 30.94-14.111 30.94-31.199-0.13-19.677-0.13-37.801-0.13-61.361 0-176.575 143.694-320.398 320.398-320.398s320.398 143.694 320.398 320.398c0 23.559 0 41.684-0.13 61.361-0.13 17.218 13.723 31.199 30.94 31.199h0.13c17.088 0 30.94-13.852 31.069-30.94 0.13-19.807 0.13-38.060 0.13-61.749-0.258-102.14-40.001-198.194-112.236-270.429zM349.406 301.637c0-88.546 71.977-160.524 160.524-160.524s160.524 71.977 160.524 160.524-71.977 160.524-160.524 160.524-160.524-72.106-160.524-160.524z" fill="" p-id="7204"></path></svg>
+			<span class="font-weight-bold pt-2" id="adminName"></span>
+		</div>
+		
+		<div class="row" id="navFrame">
+			<nav class="navbar bg-white navbar-light col-2 border">
+			  <ul class="navbar-nav col-12">
+			    <li class="nav-item border-bottom">
+			        <a class="nav-link" href="organization_creation_audit.html" target="myFrame">
+						<img src="img/组织审核.png" width="25px" class="mr-2 pb-1"/>组织创建审核
+					</a>
+			    </li>
+			    <li class="nav-item border-bottom">
+			        <a class="nav-link" href="user_audit.html" target="myFrame">
+						<img src="img/个人认证.png" width="25px" class="mr-2 pb-2"/>个人认证
+				    </a>
+			    </li>
+			    <li class="nav-item border-bottom dropdown">
+			        <a class="nav-link dropdown-toggle" data-toggle="dropdown">
+						<img src="img/历史.png" width="25px" class="mr-2 pb-2"/>审核历史
+					</a>
+				  <div class="dropdown-menu">
+					  <a class="dropdown-item border-bottom" href="audit_history.html?type=1" target="myFrame">个人认证</a>
+					  <a class="dropdown-item" href="audit_history.html?type=2" target="myFrame">组织审核</a>
+				  </div>
+			    </li>
+			  </ul>
+			</nav>
+			<iframe id="myFrame" name="myFrame" class="col-10 border"></iframe>
+		</div>
+	</body>
+</html>

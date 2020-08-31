@@ -1,0 +1,10 @@
+logging:
+  config: classpath:logback-spring-dev.xml
+
+files-path: D:\log\media\
+
+spring:
+  redis:
+    host: 118.178.252.181
+  datasource:
+    url: jdbc:mysql://118.178.252.181:3306/fu_community?serverTimezone=Asia/Shanghai

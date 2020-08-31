@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.chenzhimeng.fu_community.mapper.MessageMapper">
+  <resultMap id="BaseResultMap" type="top.chenzhimeng.fu_community.model.Message">
+    <id column="message_id" jdbcType="INTEGER" property="messageId" />
+    <result column="receiver_id" jdbcType="INTEGER" property="receiverId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="has_read" jdbcType="BIT" property="hasRead" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    message_id, receiver_id, type, content, time, has_read
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_message
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_message
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="top.chenzhimeng.fu_community.model.Message">
+    insert into t_message (message_id, receiver_id, type, 
+      content, time, has_read
+      )
+    values (#{messageId,jdbcType=INTEGER}, #{receiverId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{hasRead,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="top.chenzhimeng.fu_community.model.Message">
+    insert into t_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        message_id,
+      </if>
+      <if test="receiverId != null">
+        receiver_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="hasRead != null">
+        has_read,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        #{messageId,jdbcType=INTEGER},
+      </if>
+      <if test="receiverId != null">
+        #{receiverId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hasRead != null">
+        #{hasRead,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="top.chenzhimeng.fu_community.model.Message">
+    update t_message
+    <set>
+      <if test="receiverId != null">
+        receiver_id = #{receiverId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hasRead != null">
+        has_read = #{hasRead,jdbcType=BIT},
+      </if>
+    </set>
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.chenzhimeng.fu_community.model.Message">
+    update t_message
+    set receiver_id = #{receiverId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      has_read = #{hasRead,jdbcType=BIT}
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+</mapper>

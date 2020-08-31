@@ -1,0 +1,59 @@
+server:
+  port: 10001
+  servlet:
+    context-path: /fu-community
+
+spring:
+  profiles:
+    active: dev
+  redis:
+    port: 6379
+    password: ---
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1
+        min-idle: 0
+    database: 0
+    timeout: 2000
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: czm
+    password: ---
+  servlet:
+    multipart:
+      max-file-size: 208896000
+      max-request-size: 208896000
+      file-size-threshold: 208896000
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+# 阿里云短信服务配置
+aliyun:
+  SMS:
+    access-key-id: ---
+    access-secret: ---
+    sign-name: 习惯日记
+    template-code:
+      register: SMS_194056992
+      login: SMS_194052105
+      verify: SMS_195721377
+  green-web:
+    access-key-id: ---
+    access-secret: ---
+    region-id: cn-shenzhen
+    account-id: 1206585123269949
+    seed: fdsyghsdfhsasdfg
+
+# token配置
+token:
+  validity-period:
+    access: 604800000 #7天
+    refresh: 2592000000 #30天
+  secret-key: e952a13791959ea04354c3fa04a91936
+
+#静态资源 地址
+protocol-address: http://www.chenzhimeng.top/fu-community/media/

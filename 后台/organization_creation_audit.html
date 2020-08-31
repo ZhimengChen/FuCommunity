@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>组织创建审核</title>
+		<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://cdn.bootcdn.net/ajax/libs/paginationjs/2.1.5/pagination.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+		<link href="https://cdn.bootcdn.net/ajax/libs/paginationjs/2.1.5/pagination.css" rel="stylesheet">
+		<script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+		
+		<link rel="stylesheet" href="css/my_frame.css" />
+		<link rel="stylesheet" href="css/overview.css" />
+		<script src="js/ajax_conf.js"></script>
+		<script src="js/organization_creation_audit.js"></script>
+	</head>
+	<body class="container-fluid">
+		<div class="border-bottom header pt-3">
+			<span>组织创建审核</span>
+		</div>
+		<div>
+			<div class="row table-head mt-4">
+				<div class="offset-1 col-2">组织名称</div>
+				<div class="col-1">创建者</div>
+				<div class="col-2">联系方式</div>
+				<div class="col-2">审核状态</div>
+				<div class="col-1">审核人</div>
+				<div class="col-2">审核时间</div>
+			</div>
+			<div id="organizations">
+				<div id="page_organizations">
+					<center class="mt-5"><h5>正在拼命加载数据...</h5></center>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

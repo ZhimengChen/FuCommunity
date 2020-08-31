@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.chenzhimeng.fu_community.mapper.CommentMapper">
+  <resultMap id="BaseResultMap" type="top.chenzhimeng.fu_community.model.Comment">
+    <id column="comment_id" jdbcType="INTEGER" property="commentId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="news_id" jdbcType="INTEGER" property="newsId" />
+    <result column="reply_id" jdbcType="INTEGER" property="replyId" />
+    <result column="text" jdbcType="VARCHAR" property="text" />
+    <result column="pic" jdbcType="VARCHAR" property="pic" />
+    <result column="comment_time" jdbcType="TIMESTAMP" property="commentTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    comment_id, user_id, news_id, reply_id, text, pic, comment_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="top.chenzhimeng.fu_community.model.Comment">
+    insert into t_comment (comment_id, user_id, news_id, 
+      reply_id, text, pic,
+      comment_time)
+    values (#{commentId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{newsId,jdbcType=INTEGER}, 
+      #{replyId,jdbcType=INTEGER}, #{text,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR},
+      #{commentTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="top.chenzhimeng.fu_community.model.Comment">
+    insert into t_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commentId != null">
+        comment_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="newsId != null">
+        news_id,
+      </if>
+      <if test="replyId != null">
+        reply_id,
+      </if>
+      <if test="text != null">
+        text,
+      </if>
+      <if test="pic != null">
+        pic,
+      </if>
+      <if test="commentTime != null">
+        comment_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commentId != null">
+        #{commentId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="newsId != null">
+        #{newsId,jdbcType=INTEGER},
+      </if>
+      <if test="replyId != null">
+        #{replyId,jdbcType=INTEGER},
+      </if>
+      <if test="text != null">
+        #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null">
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="commentTime != null">
+        #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="top.chenzhimeng.fu_community.model.Comment">
+    update t_comment
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="newsId != null">
+        news_id = #{newsId,jdbcType=INTEGER},
+      </if>
+      <if test="replyId != null">
+        reply_id = #{replyId,jdbcType=INTEGER},
+      </if>
+      <if test="text != null">
+        text = #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null">
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="commentTime != null">
+        comment_time = #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.chenzhimeng.fu_community.model.Comment">
+    update t_comment
+    set user_id = #{userId,jdbcType=INTEGER},
+      news_id = #{newsId,jdbcType=INTEGER},
+      reply_id = #{replyId,jdbcType=INTEGER},
+      text = #{text,jdbcType=VARCHAR},
+      pic = #{pic,jdbcType=VARCHAR},
+      comment_time = #{commentTime,jdbcType=TIMESTAMP}
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+</mapper>

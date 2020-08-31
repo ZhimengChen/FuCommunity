@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <contextName>fu-community</contextName>
+
+    <property name="log_dir" value="/var/fu-community/log"/>
+    <property name="FILE_LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS}  %-5level --- [%15thread] %logger :%n-->%msg%n%n"/>
+
+    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>error</level>
+        </filter>
+        <File>${log_dir}/error.log</File>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--文件路径-->
+            <FileNamePattern>${log_dir}/error.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--保留最近10天的日志-->
+            <maxHistory>10</maxHistory>
+            <!--指定日志文件的上限大小-->
+            <!--<totalSizeCap>1GB</totalSizeCap>-->
+        </rollingPolicy>
+        <!--日志输出编码格式化-->
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="web" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>info</level>
+        </filter>
+        <File>${log_dir}/web.log</File>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--文件路径-->
+            <FileNamePattern>${log_dir}/web.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--保留最近10天的日志-->
+            <maxHistory>10</maxHistory>
+            <!--用来指定日志文件的上限大小-->
+            <!--<totalSizeCap>1GB</totalSizeCap>-->
+        </rollingPolicy>
+        <!--日志输出编码格式化-->
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
+    <logger name="org.springframework" level="info"/>
+    <logger name="org.mybatis" level="info"/>
+
+    <root lever="INFO">
+        <appender-ref ref="error"/>
+        <appender-ref ref="web"/>
+    </root>
+
+</Configuration>

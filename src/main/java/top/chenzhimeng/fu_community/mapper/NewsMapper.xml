@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.chenzhimeng.fu_community.mapper.NewsMapper">
+    <resultMap id="BaseResultMap" type="top.chenzhimeng.fu_community.model.News">
+        <id column="news_id" jdbcType="INTEGER" property="newsId"/>
+        <result column="publisher_id" jdbcType="INTEGER" property="publisherId"/>
+        <result column="organization_id" jdbcType="INTEGER" property="organizationId"/>
+        <result column="text" jdbcType="VARCHAR" property="text"/>
+        <result column="media" jdbcType="VARCHAR" property="media"/>
+        <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime"/>
+        <result column="has_check" jdbcType="TINYINT" property="hasCheck"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    news_id, publisher_id, organization_id, text, media, publish_time, has_check
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_news
+        where news_id = #{newsId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_news
+    where news_id = #{newsId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="top.chenzhimeng.fu_community.model.News">
+    insert into t_news (news_id, publisher_id, organization_id, 
+      text, media, publish_time, 
+      has_check)
+    values (#{newsId,jdbcType=INTEGER}, #{publisherId,jdbcType=INTEGER}, #{organizationId,jdbcType=INTEGER}, 
+      #{text,jdbcType=VARCHAR}, #{media,jdbcType=VARCHAR}, #{publishTime,jdbcType=TIMESTAMP}, 
+      #{hasCheck,jdbcType=TINYINT})
+  </insert>
+    <insert id="insertSelective" parameterType="top.chenzhimeng.fu_community.model.News" useGeneratedKeys="true"
+            keyProperty="newsId" keyColumn="news_id">
+        insert into t_news
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="newsId != null">
+                news_id,
+            </if>
+            <if test="publisherId != null">
+                publisher_id,
+            </if>
+            <if test="organizationId != null">
+                organization_id,
+            </if>
+            <if test="text != null">
+                text,
+            </if>
+            <if test="media != null">
+                media,
+            </if>
+            <if test="publishTime != null">
+                publish_time,
+            </if>
+            <if test="hasCheck != null">
+                has_check,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="newsId != null">
+                #{newsId,jdbcType=INTEGER},
+            </if>
+            <if test="publisherId != null">
+                #{publisherId,jdbcType=INTEGER},
+            </if>
+            <if test="organizationId != null">
+                #{organizationId,jdbcType=INTEGER},
+            </if>
+            <if test="text != null">
+                #{text,jdbcType=VARCHAR},
+            </if>
+            <if test="media != null">
+                #{media,jdbcType=VARCHAR},
+            </if>
+            <if test="publishTime != null">
+                #{publishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="hasCheck != null">
+                #{hasCheck,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="top.chenzhimeng.fu_community.model.News">
+        update t_news
+        <set>
+            <if test="publisherId != null">
+                publisher_id = #{publisherId,jdbcType=INTEGER},
+            </if>
+            <if test="organizationId != null">
+                organization_id = #{organizationId,jdbcType=INTEGER},
+            </if>
+            <if test="text != null">
+                text = #{text,jdbcType=VARCHAR},
+            </if>
+            <if test="media != null">
+                media = #{media,jdbcType=VARCHAR},
+            </if>
+            <if test="publishTime != null">
+                publish_time = #{publishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="hasCheck != null">
+                has_check = #{hasCheck,jdbcType=TINYINT},
+            </if>
+        </set>
+        where news_id = #{newsId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="top.chenzhimeng.fu_community.model.News">
+    update t_news
+    set publisher_id = #{publisherId,jdbcType=INTEGER},
+      organization_id = #{organizationId,jdbcType=INTEGER},
+      text = #{text,jdbcType=VARCHAR},
+      media = #{media,jdbcType=VARCHAR},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      has_check = #{hasCheck,jdbcType=TINYINT}
+    where news_id = #{newsId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.chenzhimeng.fu_community.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="top.chenzhimeng.fu_community.model.User">
+        <id column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="phone_no" jdbcType="VARCHAR" property="phoneNo"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="secret_key" jdbcType="VARCHAR" property="secretKey"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="student_no" jdbcType="INTEGER" property="studentNo"/>
+        <result column="student_name" jdbcType="VARCHAR" property="studentName"/>
+        <result column="student_card" jdbcType="VARCHAR" property="studentCard"/>
+        <result column="has_check" jdbcType="BIT" property="hasCheck"/>
+        <result column="auditor_id" jdbcType="INTEGER" property="auditorId"/>
+        <result column="audit_time" jdbcType="TIMESTAMP" property="auditTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    user_id, phone_no, avatar, secret_key, password, student_no, student_name, student_card, 
+    has_check, auditor_id, audit_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="top.chenzhimeng.fu_community.model.User">
+    insert into t_user (user_id, phone_no, avatar, 
+      secret_key, password, student_no, 
+      student_name, student_card, has_check, 
+      auditor_id, audit_time)
+    values (#{userId,jdbcType=INTEGER}, #{phoneNo,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
+      #{secretKey,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{studentNo,jdbcType=INTEGER}, 
+      #{studentName,jdbcType=VARCHAR}, #{studentCard,jdbcType=VARCHAR}, #{hasCheck,jdbcType=BIT}, 
+      #{auditorId,jdbcType=INTEGER}, #{auditTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="top.chenzhimeng.fu_community.model.User" useGeneratedKeys="true"
+            keyColumn="user_id" keyProperty="userId">
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="phoneNo != null">
+                phone_no,
+            </if>
+            <if test="avatar != null">
+                avatar,
+            </if>
+            <if test="secretKey != null">
+                secret_key,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="studentNo != null">
+                student_no,
+            </if>
+            <if test="studentName != null">
+                student_name,
+            </if>
+            <if test="studentCard != null">
+                student_card,
+            </if>
+            <if test="hasCheck != null">
+                has_check,
+            </if>
+            <if test="auditorId != null">
+                auditor_id,
+            </if>
+            <if test="auditTime != null">
+                audit_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="phoneNo != null">
+                #{phoneNo,jdbcType=VARCHAR},
+            </if>
+            <if test="avatar != null">
+                #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="secretKey != null">
+                #{secretKey,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="studentNo != null">
+                #{studentNo,jdbcType=INTEGER},
+            </if>
+            <if test="studentName != null">
+                #{studentName,jdbcType=VARCHAR},
+            </if>
+            <if test="studentCard != null">
+                #{studentCard,jdbcType=VARCHAR},
+            </if>
+            <if test="hasCheck != null">
+                #{hasCheck,jdbcType=BIT},
+            </if>
+            <if test="auditorId != null">
+                #{auditorId,jdbcType=INTEGER},
+            </if>
+            <if test="auditTime != null">
+                #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="top.chenzhimeng.fu_community.model.User">
+        update t_user
+        <set>
+            <if test="phoneNo != null">
+                phone_no = #{phoneNo,jdbcType=VARCHAR},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="secretKey != null">
+                secret_key = #{secretKey,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="studentNo != null">
+                student_no = #{studentNo,jdbcType=INTEGER},
+            </if>
+            <if test="studentName != null">
+                student_name = #{studentName,jdbcType=VARCHAR},
+            </if>
+            <if test="studentCard != null">
+                student_card = #{studentCard,jdbcType=VARCHAR},
+            </if>
+            <if test="hasCheck != null">
+                has_check = #{hasCheck,jdbcType=BIT},
+            </if>
+            <if test="auditorId != null">
+                auditor_id = #{auditorId,jdbcType=INTEGER},
+            </if>
+            <if test="auditTime != null">
+                audit_time = #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="top.chenzhimeng.fu_community.model.User">
+    update t_user
+    set phone_no = #{phoneNo,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      secret_key = #{secretKey,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      student_no = #{studentNo,jdbcType=INTEGER},
+      student_name = #{studentName,jdbcType=VARCHAR},
+      student_card = #{studentCard,jdbcType=VARCHAR},
+      has_check = #{hasCheck,jdbcType=BIT},
+      auditor_id = #{auditorId,jdbcType=INTEGER},
+      audit_time = #{auditTime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

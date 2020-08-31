@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>组织详情</title>
+		<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+		<script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+		
+		<link rel="stylesheet" href="css/my_frame.css" />
+		<link rel="stylesheet" href="css/detail.css" />
+		<script src="js/ajax_conf.js"></script>
+		<script src="js/organization_detail.js"></script>
+	</head>
+	<body class="container-fluid">
+		<div class="border-bottom header pt-3">
+			<span>组织创建审核 > 详情</span>
+		</div>
+		<div class="offset-3 col-9 font-weight-bold" id="detail">
+			<div class="my-5 row">
+				<span class="col-2">组织名称:</span>
+				<span></span>
+			</div>
+			<div class="my-5 row">
+				<span class="col-2">组织logo:</span>
+				<img width="100px"/>
+			</div>
+			<div class="my-5 row">
+				<span class="col-2">slogan:</span>
+				<span></span>
+			</div>
+			<div class="my-5 row">
+				<span class="col-2">intro:</span>
+				<span></span>
+			</div>
+			<div class="my-5 row">
+				<span class="col-2">联系方式:</span>
+				<span></span>
+			</div>
+			<br>
+			<div class="row pl-3" hidden="true">
+				<button class="btn btn-primary col-2 btn-lg" value="true" id="passBtn">通过</button>
+				<button class="btn btn-outline-dark ml-5 col-2 btn-lg" value="false" id="rejectBtn">拒绝</button>
+			</div>
+		</div>
+	</body>
+</html>
