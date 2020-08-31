@@ -1,14 +1,12 @@
 package top.chenzhimeng.fu_community.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.DeleteProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.HtmlUtils;
 import top.chenzhimeng.fu_community.model.Organization;
-import top.chenzhimeng.fu_community.model.User;
 import top.chenzhimeng.fu_community.service.IOrganizationService;
 import top.chenzhimeng.fu_community.service.IUserService;
 import top.chenzhimeng.fu_community.util.FileUtil;
@@ -267,6 +265,7 @@ public class OrganizationController {
      * "msg":""
      * }
      */
+    @DeleteMapping("/member/remove")
     public Map<String, Object> removeMember(Integer organizationId, Integer memberId, HttpServletRequest request) {
         Integer userId = (Integer) request.getAttribute("userId");
         String identity = organizationService.findIdentity(userId, organizationId);
