@@ -26,8 +26,6 @@ public interface IOrganizationService {
 
     Organization findById(Integer organizationId);
 
-    int updateById(Organization organization);
-
     List<Organization> findHistory();
 
     String findIdentity(Integer userId, Integer organizationId);
@@ -46,4 +44,5 @@ public interface IOrganizationService {
 
     int audit(Organization organization);
 
+    boolean grantAdmin(Map<String, Integer> map);
 }

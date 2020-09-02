@@ -70,19 +70,6 @@ public interface UserMapper {
     User selectByIds(Map<String, Integer> map);
 
     /**
-     * 查询某组织的所有成员（包括创建者和管理员）
-     *
-     * @param organizationId 待查询的组织id
-     * @return users
-     */
-    @Select("SELECT " + baseColumnList + " FROM t_user " +
-            "WHERE user_id=(SELECT founder_id FROM t_organization WHERE organization_id=#{organizationId}) " +
-            "OR user_id IN (SELECT admin_id FROM t_organization_admin WHERE organization_id=#{organizationId} AND has_check=1) " +
-            "OR user_id IN (SELECT member_id FROM t_organization_member WHERE organization_id=#{organizationId} AND has_check=1)")
-    @ResultMap("BaseResultMap")
-    List<User> selectByOrganizationId(Integer organizationId);
-
-    /**
      * 获取某用户信息
      * 及其所有组织
      * 及其最新发布的10条动态
@@ -146,4 +133,14 @@ public interface UserMapper {
             "WHERE user_id IN (SELECT admin_id FROM t_organization_admin WHERE organization_id=#{organizationId}) " +
             "OR user_id=(SELECT founder_id FROM t_organization WHERE organization_id=#{organizationId})")
     List<User> selectAdminsAndFounderByOrganizationId(Integer organizationId);
+
+    @Select("SELECT user_id,avatar,student_name FROM t_user " +
+            "WHERE user_id IN (SELECT admin_id FROM t_organization_admin WHERE organization_id=#{organizationId})")
+    @ResultMap("BaseResultMap")
+    List<User> selectAdminsByOrganizationId(Integer organizationId);
+
+    @Select("SELECT user_id,avatar,student_name FROM t_user " +
+            "WHERE user_id IN (SELECT member_id FROM t_organization_member WHERE organization_id=#{organizationId} AND has_check=1)")
+    @ResultMap("BaseResultMap")
+    List<User> selectMembersByOrganizationId(Integer organizationId);
 }

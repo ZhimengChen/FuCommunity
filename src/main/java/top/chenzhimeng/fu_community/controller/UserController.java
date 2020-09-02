@@ -414,7 +414,9 @@ public class UserController {
      * @return {
      * "result" : true|false,
      * "msg" : "查询失败才有此信息"
-     * "users" : users
+     * "founder":user
+     * "admins":List<User>
+     * "members":List<User>
      * }
      */
     @GetMapping("/organization/{organizationId}")
@@ -430,16 +432,18 @@ public class UserController {
             return map;
         }
 
-        List<User> users = userService.findByOrganizationId(organizationId);
-        for (User user : users) {
-            user.setPhoneNo(null);
-            user.setSecretKey(null);
-            user.setPassword(null);
-            user.setStudentNo(null);
-            user.setStudentCard(null);
-            user.setAuditorId(null);
-        }
-        map.put("users", users);
+        User founder = userService.findById(organizationService.findById(organizationId).getFounderId());
+        List<User> admins = userService.findAdminsByOrganizationId(organizationId);
+        List<User> members = userService.findMembersByOrganizationId(organizationId);
+
+        User modifiedFounder = new User();
+        modifiedFounder.setUserId(founder.getUserId());
+        modifiedFounder.setAvatar(founder.getAvatar());
+        modifiedFounder.setStudentName(founder.getStudentName());
+
+        map.put("founder", modifiedFounder);
+        map.put("admins", admins);
+        map.put("members", members);
         map.put("result", true);
         return map;
     }

@@ -9,4 +9,6 @@ public interface IMessageService {
     List<Message> findByUserId(Map<String, Integer> map);
 
     int updateById(Message message);
+
+    Map<Integer, Integer> findUnreadCountsByUserId(Integer userId);
 }

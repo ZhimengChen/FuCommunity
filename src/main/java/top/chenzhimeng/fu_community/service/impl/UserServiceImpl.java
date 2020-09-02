@@ -52,11 +52,6 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public List<User> findByOrganizationId(Integer organizationId) {
-        return userMapper.selectByOrganizationId(organizationId);
-    }
-
-    @Override
     public User findUserOrganizationsNewsByIds(Integer myId, Integer userId) {
         return userMapper.selectUserOrganizationsNewsByIds(myId, userId);
     }
@@ -98,5 +93,15 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User findUserAuditorById(Integer userId) {
         return userMapper.selectUserAuditorById(userId);
+    }
+
+    @Override
+    public List<User> findAdminsByOrganizationId(Integer organizationId) {
+        return userMapper.selectAdminsByOrganizationId(organizationId);
+    }
+
+    @Override
+    public List<User> findMembersByOrganizationId(Integer organizationId) {
+        return userMapper.selectMembersByOrganizationId(organizationId);
     }
 }

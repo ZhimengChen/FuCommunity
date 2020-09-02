@@ -282,4 +282,34 @@ public class OrganizationController {
         }
         return map;
     }
+
+    /**
+     * 组织创建者任命管理员
+     *
+     * @param request        获取操作者id
+     * @param organizationId 组织id
+     * @param adminId        管理员id
+     * @return {
+     * "result":true|false
+     * "msg":"无此权限（失败时才有）"
+     * }
+     */
+    @PostMapping("/admin")
+    public Map<String, Object> grantAdmin(HttpServletRequest request, Integer organizationId, Integer adminId) {
+        Integer myId = (Integer) request.getAttribute("userId");
+        log.info("grant admin {myId : {}, organizationId : {}, adminId : {}}", myId, organizationId, adminId);
+        String identity = organizationService.findIdentity(myId, organizationId);
+        log.info("grant admin {identity : {}}", identity);
+
+        Map<String, Object> returnMap = new HashMap<>();
+        returnMap.put("result", false);
+
+        if (!identity.equals("FOUNDER")) {
+            returnMap.put("msg", "无此权限");
+            return returnMap;
+        }
+
+        returnMap.put("result", organizationService.grantAdmin(Map.of("organizationId", organizationId, "adminId", adminId)));
+        return returnMap;
+    }
 }

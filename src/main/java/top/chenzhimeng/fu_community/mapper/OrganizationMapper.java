@@ -43,7 +43,7 @@ public interface OrganizationMapper {
     @Select("SELECT " + baseColumnList + " FROM t_organization " +
             "WHERE " +
             "organization_id " +
-            "IN (SELECT organization_id FROM t_organization_admin WHERE admin_id=#{adminId} AND has_check=1)")
+            "IN (SELECT organization_id FROM t_organization_admin WHERE admin_id=#{adminId})")
     @ResultMap("BaseResultMap")
     List<Organization> selectByAdminId(Integer adminId);
 
@@ -129,7 +129,7 @@ public interface OrganizationMapper {
      * @return 0|1
      */
     @Select("SELECT COUNT(1) FROM t_organization_admin " +
-            "WHERE organization_id=#{organizationId} AND admin_id=#{userId} AND has_check=1")
+            "WHERE organization_id=#{organizationId} AND admin_id=#{userId}")
     int isAdmin(Map<String, Integer> map);
 
     /**
@@ -210,4 +210,7 @@ public interface OrganizationMapper {
 
     @Update("UPDATE t_organization_member SET has_check=1 WHERE organization_id=#{organizationId} AND member_id=#{memberId}")
     int updateMember(Map<String, Integer> map);
+
+    @Insert("INSERT INTO t_organization_admin(organization_id,admin_id) VALUES(#{organizationId},#{adminId})")
+    int insertAdmin(Map<String, Integer> map);
 }

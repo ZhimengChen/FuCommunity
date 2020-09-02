@@ -261,7 +261,11 @@ public class NewsController {
     public Map<String, Object> updateNews(HttpServletRequest request, News news, MultipartFile[] files)
             throws ClientException {
         Integer userId = (Integer) request.getAttribute("userId");
-        log.info("updateNews {userId: {}, organizationId: {}, text: {}}", userId, news.getOrganizationId(), news.getText());
+        //通过查询获取organizationId而不是从前端获取id是为了避免用户通过自己在其他组织的权限修改该动态
+        news.setOrganizationId(newsService.findById(news.getNewsId()).getOrganizationId());
+
+        String text = news.getText();
+        log.info("updateNews {userId: {}, organizationId: {}, text: {}}", userId, news.getOrganizationId(), text);
         news.setPublisherId(userId);
 
         Map<String, Object> map = new HashMap<>();
@@ -286,7 +290,7 @@ public class NewsController {
         news.setPublishTime(null);
         news.setHasCheck(null);
 
-        if (MonitorUtil.textIsSpam(news.getText())) {
+        if (text != null && !text.isBlank() && MonitorUtil.textIsSpam(text)) {
             map.put("msg", "言论违规，修改失败");
             return map;
         }

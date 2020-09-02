@@ -2,6 +2,7 @@ package top.chenzhimeng.fu_community.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import top.chenzhimeng.fu_community.mapper.MessageMapper;
 import top.chenzhimeng.fu_community.mapper.OrganizationMapper;
 import top.chenzhimeng.fu_community.mapper.UserMapper;
@@ -78,11 +79,6 @@ public class OrganizationServiceImpl implements IOrganizationService {
     @Override
     public Organization findById(Integer organizationId) {
         return organizationMapper.selectByPrimaryKey(organizationId);
-    }
-
-    @Override
-    public int updateById(Organization organization) {
-        return organizationMapper.updateByPrimaryKeySelective(organization);
     }
 
     @Override
@@ -170,6 +166,13 @@ public class OrganizationServiceImpl implements IOrganizationService {
             messageMapper.insertSelective(message);
         });
         return organizationMapper.updateByPrimaryKeySelective(organization);
+    }
+
+    @Override
+    @Transactional
+    public boolean grantAdmin(Map<String, Integer> map) {
+        organizationMapper.deleteMember(map.get("organizationId"), map.get("adminId"));
+        return organizationMapper.insertAdmin(map) > 0;
     }
 
 }

@@ -34,7 +34,7 @@ spring:
 # 阿里云短信服务配置
 aliyun:
   SMS:
-    access-key-id: ---
+    access-key-id: LTAI4G7RyjpEVkPv8bRSwdK9
     access-secret: ---
     sign-name: 习惯日记
     template-code:
@@ -42,7 +42,7 @@ aliyun:
       login: SMS_194052105
       verify: SMS_195721377
   green-web:
-    access-key-id: ---
+    access-key-id: LTAI4G7RyjpEVkPv8bRSwdK9
     access-secret: ---
     region-id: cn-shenzhen
     account-id: 1206585123269949

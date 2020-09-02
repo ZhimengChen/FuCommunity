@@ -16,8 +16,6 @@ public interface IUserService {
 
     User findById(Integer userId);
 
-    List<User> findByOrganizationId(Integer organizationId);
-
     User findUserOrganizationsNewsByIds(Integer myId, Integer userId);
 
     List<User> findSubscribedById(Map<String, Integer> map);
@@ -33,4 +31,8 @@ public interface IUserService {
     int findTotalCount();
 
     User findUserAuditorById(Integer userId);
+
+    List<User> findAdminsByOrganizationId(Integer organizationId);
+
+    List<User> findMembersByOrganizationId(Integer organizationId);
 }

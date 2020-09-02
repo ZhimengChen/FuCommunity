@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 import top.chenzhimeng.fu_community.model.Message;
 
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 
@@ -28,4 +29,28 @@ public interface MessageMapper {
     @Select("SELECT " + baseColumnList + " FROM t_message WHERE receiver_id=#{receiverId} ORDER BY time DESC limit #{offset},#{length}")
     @ResultMap("BaseResultMap")
     List<Message> selectByUserId(Map<String, Integer> map);
+
+    @Select("SELECT type,COUNT(message_id) AS count FROM t_message WHERE receiver_id=#{userId} AND has_read=0 GROUP BY type")
+    List<TypeCountMap> selectUnreadCountsByUserId(Integer userId);
+
+    class TypeCountMap {
+        private Integer type;
+        private Integer count;
+
+        public Integer getType() {
+            return type;
+        }
+
+        public void setType(Integer type) {
+            this.type = type;
+        }
+
+        public Integer getCount() {
+            return count;
+        }
+
+        public void setCount(Integer count) {
+            this.count = count;
+        }
+    }
 }
