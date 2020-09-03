@@ -1,5 +1,6 @@
 package top.chenzhimeng.fu_community.mapper;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -32,6 +33,9 @@ public interface MessageMapper {
 
     @Select("SELECT type,COUNT(message_id) AS count FROM t_message WHERE receiver_id=#{userId} AND has_read=0 GROUP BY type")
     List<TypeCountMap> selectUnreadCountsByUserId(Integer userId);
+
+    @Delete("DELETE FROM t_message WHERE content=#{content}")
+    int deleteByContent(String content);
 
     class TypeCountMap {
         private Integer type;

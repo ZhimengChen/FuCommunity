@@ -73,9 +73,10 @@ public class NewsServiceImpl implements INewsService {
     @Override
     public void deleteById(Integer newsId, String media) {
         newsMapper.deleteByPrimaryKey(newsId);
+        messageMapper.deleteByContent(newsId.toString());
         threadPoor.execute(() -> {
             log.info("{media : {}}", media);
-            String[] mediaArray = (String[]) JSONArray.parse(media);
+            String[] mediaArray = JSONArray.parseArray(media, String.class).toArray(String[]::new);
             for (String url : mediaArray) {
                 FileUtil.delete(url);
             }
