@@ -88,22 +88,27 @@ public class OrganizationController {
     }
 
     /**
-     * 查找用户创建、管理、加入的组织（并返回3个推荐组织）
+     * 查找用户创建、管理、加入的组织（若是本人同时返回3个推荐组织）
      *
      * @param request 用于获取用户id
      * @return {"my":[organizations] , "recommend:[organizations]}
      */
-    @GetMapping("/my")
-    public Map<String, Object> getMy(HttpServletRequest request) throws ExecutionException, InterruptedException {
+    @GetMapping("/user")
+    public Map<String, Object> getMy(HttpServletRequest request, Integer userId) throws ExecutionException, InterruptedException {
         Map<String, Object> map = new HashMap<>();
-        Integer userId = (Integer) request.getAttribute("userId");
+        boolean flag = false;
+        if (userId == null) {
+            userId = (Integer) request.getAttribute("userId");
+            flag = true;
+        }
         log.info("{userId: {}}", userId);
 
         List<Organization> organizations = new ArrayList<>();
 
-        CompletableFuture<List<Organization>> queryByFounderId = CompletableFuture.supplyAsync(() -> organizationService.findByFounderId(userId));
-        CompletableFuture<List<Organization>> queryByAdminId = CompletableFuture.supplyAsync(() -> organizationService.findByAdminId(userId));
-        CompletableFuture<List<Organization>> queryByMemberId = CompletableFuture.supplyAsync(() -> organizationService.findByMemberId(userId));
+        final Integer finalUserId = userId;
+        CompletableFuture<List<Organization>> queryByFounderId = CompletableFuture.supplyAsync(() -> organizationService.findByFounderId(finalUserId));
+        CompletableFuture<List<Organization>> queryByAdminId = CompletableFuture.supplyAsync(() -> organizationService.findByAdminId(finalUserId));
+        CompletableFuture<List<Organization>> queryByMemberId = CompletableFuture.supplyAsync(() -> organizationService.findByMemberId(finalUserId));
         CompletableFuture.allOf(queryByFounderId, queryByAdminId, queryByMemberId).join();
 
         organizations.addAll(queryByFounderId.get());
@@ -119,13 +124,15 @@ public class OrganizationController {
         }
         map.put("my", organizations);
 
-        List<Organization> hotOrganizations = organizationService.findHot(myOrganizationIds.size() > 0 ? myOrganizationIds : null);
-        for (var organization : hotOrganizations) {
-            organization.setContact(null);
-            organization.setAuditorId(null);
-            organization.setAuditTime(null);
+        if (flag) {
+            List<Organization> hotOrganizations = organizationService.findHot(myOrganizationIds.size() > 0 ? myOrganizationIds : null);
+            for (var organization : hotOrganizations) {
+                organization.setContact(null);
+                organization.setAuditorId(null);
+                organization.setAuditTime(null);
+            }
+            map.put("recommend", hotOrganizations);
         }
-        map.put("recommend", hotOrganizations);
         return map;
     }
 
