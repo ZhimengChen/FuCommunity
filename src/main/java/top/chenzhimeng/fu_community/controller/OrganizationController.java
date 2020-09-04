@@ -63,7 +63,7 @@ public class OrganizationController {
 
         assert originalFilename != null;
         String suffix = originalFilename.substring(originalFilename.indexOf('.') + 1);
-        if (!suffix.matches("^(?i)JPG|BPM|PNG|TIFF|RAW$")) {
+        if (!suffix.matches("^(?i)JPG|JPEG|BPM|PNG|TIFF|RAW$")) {
             map.put("msg", "不支持的图片格式");
             return map;
         }

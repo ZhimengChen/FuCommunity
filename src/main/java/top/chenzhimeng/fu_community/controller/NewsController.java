@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import top.chenzhimeng.fu_community.model.News;
 import top.chenzhimeng.fu_community.model.Organization;
-import top.chenzhimeng.fu_community.model.User;
 import top.chenzhimeng.fu_community.service.INewsService;
 import top.chenzhimeng.fu_community.service.IOrganizationService;
 import top.chenzhimeng.fu_community.service.IUserService;

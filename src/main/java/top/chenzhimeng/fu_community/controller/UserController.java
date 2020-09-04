@@ -142,15 +142,16 @@ public class UserController {
         String[] keyAndSecret = EncryptUtil.encrypt(user.getPassword());
         user.setSecretKey(keyAndSecret[0]);
         user.setPassword(keyAndSecret[1]);
-        if (userService.insert(user) > 0) {
+
+        try {
+            userService.insert(user);
             String[] accessAndRefreshToken = TokenUtil.signTokens(user.getUserId(), 1L);
             threadPool.submit(() -> stringSerializableValueOperations.increment("tokenVersion_" + user.getUserId().toString()));
             map.put("result", true);
             map.put("tokens", accessAndRefreshToken);
-            return map;
+        } catch (Exception e) {
+            map.put("msg", "该手机已被注册");
         }
-
-        map.put("msg", "该手机号已被注册");
         return map;
     }
 
