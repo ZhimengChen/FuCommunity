@@ -67,7 +67,7 @@ public class UserController {
      */
     @PostMapping("/auth/{type}")
     public Map<String, Object> getAuthCode(String phoneNo, @PathVariable String type) throws ClientException {
-        log.info("[phoneNo: {}; type: {}]", phoneNo, type);
+        log.info("auth code {phoneNo: {}, type: {}}", phoneNo, type);
         Map<String, Object> map = new HashMap<>();
         map.put("result", false);
 
@@ -352,7 +352,7 @@ public class UserController {
         if (userService.updateByIdSelective(user) > 0) {
             map.put("result", true);
             threadPool.submit(() -> {
-                FileUtil.delete(oldCard);
+                if (oldCard != null) FileUtil.delete(oldCard);
                 try {
                     userService.updateAuditStateById(Map.of("userId", userId));
                     FileUtil.transferTo(card, dateNow, fileName);
