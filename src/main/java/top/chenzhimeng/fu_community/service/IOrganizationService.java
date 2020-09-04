@@ -45,4 +45,6 @@ public interface IOrganizationService {
     int audit(Organization organization);
 
     boolean grantAdmin(Map<String, Integer> map);
+
+    boolean deGrantAdmin(Map<String, Integer> map);
 }

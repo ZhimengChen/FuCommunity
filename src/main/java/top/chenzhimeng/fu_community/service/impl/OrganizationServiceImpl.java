@@ -175,4 +175,15 @@ public class OrganizationServiceImpl implements IOrganizationService {
         return organizationMapper.insertAdmin(map) > 0;
     }
 
+    @Override
+    @Transactional
+    public boolean deGrantAdmin(Map<String, Integer> map) {
+        Integer organizationId = map.get("organizationId");
+        Integer adminId = map.get("adminId");
+        organizationMapper.deleteAdmin(organizationId, adminId);
+        organizationMapper.insertMember(adminId, organizationId);
+        map.put("memberId", adminId);
+        return organizationMapper.updateMember(map) > 0;
+    }
+
 }

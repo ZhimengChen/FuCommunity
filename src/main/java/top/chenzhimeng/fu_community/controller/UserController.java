@@ -322,7 +322,7 @@ public class UserController {
 
         Integer userId = (Integer) request.getAttribute("userId");
         String originalFilename = card.getOriginalFilename();
-        log.info("[userId: {}; studentNo: {}; studentName: {}; studentCardFileName: {}]",
+        log.info("update identity {userId: {}, studentNo: {}, studentName: {}, studentCardFileName: {}}",
                 userId, studentNo, studentName, originalFilename);
 
         if (studentName.length() < 2 || studentName.length() > 5) {
@@ -344,12 +344,18 @@ public class UserController {
 
         String dateNow = LocalDate.now().toString();
         String fileName = UUID.randomUUID().toString() + '.' + suffix;
-        user.setUserId(userId);
-        user.setStudentName(HtmlUtils.htmlEscape(studentName));
-        user.setStudentCard(protocolAddress + dateNow + '/' + fileName);
-        String oldCard = userService.findById(userId).getStudentCard();
 
-        if (userService.updateByIdSelective(user) > 0) {
+        User oldUser = userService.findById(userId);
+        oldUser.setUserId(userId);
+        oldUser.setStudentNo(studentNo);
+        oldUser.setStudentName(HtmlUtils.htmlEscape(studentName));
+        oldUser.setStudentCard(protocolAddress + dateNow + '/' + fileName);
+        oldUser.setAuditorId(null);
+        oldUser.setHasCheck(null);
+        oldUser.setAuditTime(null);
+        String oldCard = oldUser.getStudentCard();
+
+        if (userService.updateById(oldUser) > 0) {
             map.put("result", true);
             threadPool.submit(() -> {
                 if (oldCard != null) FileUtil.delete(oldCard);

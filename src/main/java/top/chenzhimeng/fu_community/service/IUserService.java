@@ -35,4 +35,6 @@ public interface IUserService {
     List<User> findAdminsByOrganizationId(Integer organizationId);
 
     List<User> findMembersByOrganizationId(Integer organizationId);
+
+    int updateById(User user);
 }

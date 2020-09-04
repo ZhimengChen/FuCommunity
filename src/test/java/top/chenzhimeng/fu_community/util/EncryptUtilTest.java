@@ -12,6 +12,6 @@ class EncryptUtilTest {
 
     @Test
     void encrypt() throws InvalidKeyException, NoSuchAlgorithmException {
-        System.out.println(Arrays.toString(EncryptUtil.encrypt("698d51a19d8a121ce581499d7b701668")));
+        System.out.println(Arrays.toString(EncryptUtil.encrypt("4cc9dc6d919742d6aff9477c12296eb1")));
     }
 }

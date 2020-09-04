@@ -104,4 +104,9 @@ public class UserServiceImpl implements IUserService {
     public List<User> findMembersByOrganizationId(Integer organizationId) {
         return userMapper.selectMembersByOrganizationId(organizationId);
     }
+
+    @Override
+    public int updateById(User user) {
+        return userMapper.updateByPrimaryKey(user);
+    }
 }
