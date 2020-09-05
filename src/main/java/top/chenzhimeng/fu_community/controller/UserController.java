@@ -384,7 +384,7 @@ public class UserController {
     public void subscribe(HttpServletRequest request, Integer userId, Integer organizationId) {
         String method = request.getMethod();
         Integer fansId = (Integer) request.getAttribute("userId");
-        log.info("{method : {}, subscribedUserId : {}, subscribedOrganizationId : {}, fansId : {}}", method, userId,
+        log.info("subscribed or deSubscribed {method : {}, subscribedUserId : {}, subscribedOrganizationId : {}, fansId : {}}", method, userId,
                 organizationId, fansId);
         if (method.equalsIgnoreCase("post")) {
             fansService.insert(userId, organizationId, fansId);
@@ -475,6 +475,7 @@ public class UserController {
         Integer myId = (Integer) request.getAttribute("userId");
 
         if (userId == -1) userId = myId;
+        log.info("get user info {userId : {}}",userId);
         User user = userService.findUserOrganizationsNewsByIds(myId, userId);
 
         if (user == null) return null;

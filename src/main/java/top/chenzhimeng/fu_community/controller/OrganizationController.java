@@ -301,8 +301,7 @@ public class OrganizationController {
      * "msg":"无此权限（失败时才有）"
      * }
      */
-    @PostMapping("/admin")
-    @DeleteMapping("/admin")
+    @RequestMapping(value = "/admin", method = {RequestMethod.POST, RequestMethod.DELETE})
     public Map<String, Object> grantAdmin(HttpServletRequest request, Integer organizationId, Integer adminId) {
         Integer myId = (Integer) request.getAttribute("userId");
         log.info("grant admin {myId : {}, organizationId : {}, adminId : {}}", myId, organizationId, adminId);
@@ -317,7 +316,7 @@ public class OrganizationController {
             return returnMap;
         }
 
-        Map<String, Integer> map = Map.of("organizationId", organizationId, "adminId", adminId);
+        Map<String, Integer> map = Map.of("organizationId", organizationId, "adminId", adminId, "memberId", adminId);
         returnMap.put("result", request.getMethod().equalsIgnoreCase("post") ? organizationService.grantAdmin(map) : organizationService.deGrantAdmin(map));
         return returnMap;
     }

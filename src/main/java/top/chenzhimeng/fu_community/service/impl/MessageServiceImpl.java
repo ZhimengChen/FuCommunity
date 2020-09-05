@@ -6,7 +6,6 @@ import top.chenzhimeng.fu_community.mapper.MessageMapper;
 import top.chenzhimeng.fu_community.model.Message;
 import top.chenzhimeng.fu_community.service.IMessageService;
 
-import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,8 +17,8 @@ public class MessageServiceImpl implements IMessageService {
     private MessageMapper messageMapper;
 
     @Override
-    public List<Message> findByUserId(Map<String, Integer> map) {
-        return messageMapper.selectByUserId(map);
+    public List<Message> findByTypeAndUserId(Map<String, Integer> map) {
+        return messageMapper.selectByTypeAndUserId(map);
     }
 
     @Override

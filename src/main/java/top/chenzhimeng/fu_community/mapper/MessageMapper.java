@@ -27,9 +27,10 @@ public interface MessageMapper {
 
     int updateByPrimaryKey(Message record);
 
-    @Select("SELECT " + baseColumnList + " FROM t_message WHERE receiver_id=#{receiverId} ORDER BY time DESC limit #{offset},#{length}")
+    @Select("SELECT " + baseColumnList + " FROM t_message WHERE receiver_id=#{receiverId} AND type=#{type} " +
+            "ORDER BY time DESC limit #{offset},#{length}")
     @ResultMap("BaseResultMap")
-    List<Message> selectByUserId(Map<String, Integer> map);
+    List<Message> selectByTypeAndUserId(Map<String, Integer> map);
 
     @Select("SELECT type,COUNT(message_id) AS count FROM t_message WHERE receiver_id=#{userId} AND has_read=0 GROUP BY type")
     List<TypeCountMap> selectUnreadCountsByUserId(Integer userId);

@@ -10,7 +10,7 @@
     </parent>
     <groupId>top.chenzhimeng</groupId>
     <artifactId>fu-community</artifactId>
-    <version>0.0.40-SNAPSHOT</version>
+    <version>0.0.44-SNAPSHOT</version>
     <name>fu_community</name>
     <description>c2 final</description>
 

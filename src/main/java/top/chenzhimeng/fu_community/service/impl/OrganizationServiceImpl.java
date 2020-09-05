@@ -182,7 +182,6 @@ public class OrganizationServiceImpl implements IOrganizationService {
         Integer adminId = map.get("adminId");
         organizationMapper.deleteAdmin(organizationId, adminId);
         organizationMapper.insertMember(adminId, organizationId);
-        map.put("memberId", adminId);
         return organizationMapper.updateMember(map) > 0;
     }
 

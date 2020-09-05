@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IMessageService {
-    List<Message> findByUserId(Map<String, Integer> map);
+    List<Message> findByTypeAndUserId(Map<String, Integer> map);
 
     int updateById(Message message);
 

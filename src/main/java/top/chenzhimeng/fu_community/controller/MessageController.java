@@ -25,11 +25,12 @@ public class MessageController {
      * @param pageNum,length limit
      * @return messages
      */
-    @GetMapping()
-    public List<Message> getAll(HttpServletRequest request, Integer pageNum, Integer length) {
-        Map<String, Integer> map = Map.of("receiverId", (Integer) request.getAttribute("userId"), "offset", pageNum * length, "length", length);
+    @GetMapping("/{type}")
+    public List<Message> getAll(HttpServletRequest request, Integer pageNum, Integer length, @PathVariable Integer type) {
+        Map<String, Integer> map = Map.of("receiverId", (Integer) request.getAttribute("userId"),
+                "type", type, "offset", pageNum * length, "length", length);
         log.info("getMessages " + map.toString());
-        return messageService.findByUserId(map);
+        return messageService.findByTypeAndUserId(map);
     }
 
     /**
