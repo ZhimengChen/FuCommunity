@@ -31,11 +31,13 @@ public class CommentServiceImpl implements ICommentService {
         threadPool.execute(() -> {
             News news = newsMapper.selectByPrimaryKey(comment.getNewsId());
             Integer publisherId = news.getPublisherId();
-            Message message = new Message();
-            message.setReceiverId(publisherId);
-            message.setType(1);
-            message.setContent(String.valueOf(news.getNewsId()));
-            messageMapper.insertSelective(message);
+            if (!publisherId.equals(comment.getUserId())) {
+                Message message = new Message();
+                message.setReceiverId(publisherId);
+                message.setType(1);
+                message.setContent(String.valueOf(news.getNewsId()));
+                messageMapper.insertSelective(message);
+            }
         });
         return commentMapper.insertSelective(comment);
     }

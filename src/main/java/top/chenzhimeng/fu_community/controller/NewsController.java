@@ -357,6 +357,13 @@ public class NewsController {
         return news;
     }
 
+    /**
+     * 获取动态详情
+     *
+     * @param request 获取本人id
+     * @param newsId  动态id
+     * @return news
+     */
     @GetMapping("/{newsId}")
     public News getById(HttpServletRequest request, @PathVariable Integer newsId) {
         News news = newsService.findDetailById(Map.of("myId", (Integer) request.getAttribute("userId"), "newsId", newsId));
